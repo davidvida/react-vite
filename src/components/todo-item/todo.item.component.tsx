@@ -8,10 +8,6 @@ type Props = {
 const TodoItem = ({item}: Props) => {
   const { id, description, status } = item;
 
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-  }
-
   return (
     <div>
       <span>
@@ -21,10 +17,10 @@ const TodoItem = ({item}: Props) => {
         {description}
       </span>&nbsp;
       <span>
-        <button onClick={handleRemoveItem}>x</button>
+        <button data-action='delete' data-index={id}>x</button>
       </span>
     </div>
-);
+  );
 }
 
 export default TodoItem;

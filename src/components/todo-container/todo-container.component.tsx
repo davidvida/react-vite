@@ -17,13 +17,15 @@ class TodoContainer extends React.Component<{}, StateProps> {
       data: staticData
     }
     this.handleAddNewItem = this.handleAddNewItem.bind(this);
+    this.handleRemoveItem = this.handleRemoveItem.bind(this);
   }
 
   handleAddNewItem() {
     debugger;
+    const id = this.getId(this.state.data);
     const newItem: ItemProps = {
-      id: this.state.data.length + 1,
-      description: 'New Item',
+      id: id,
+      description: `New Item ${id}`,
       status: 'inProgress'
     };
 
@@ -36,11 +38,38 @@ class TodoContainer extends React.Component<{}, StateProps> {
     });
   }
 
+  private getId(data: ItemProps[]): number {
+    if (data && data.length > 0) {
+      return this.state.data.slice(-1)[0].id + 1;
+    }
+
+    return 1;
+  }
+
+  handleRemoveItem(event: React.MouseEvent) {
+    const button = event.target;
+
+    if (button instanceof HTMLButtonElement) {
+      const { action, index } = button.dataset;
+      this.removeItem(action, index);
+    }
+  }
+
+  private removeItem(action?: string, index?: string): void {
+    if (action === 'delete' && index) {
+      const newData = this.state.data.filter(item => item.id != parseInt(index));
+
+      this.setState(() => {
+        return {data: newData}
+      });
+    } 
+  }
+
   render() {
     return (
       <>
         <Header dataLength={this.state.data.length} />
-        <TodoList data={this.state.data} />
+        <TodoList data={this.state.data} onRemoveItem={this.handleRemoveItem} />
         <Footer onAddNewItem={this.handleAddNewItem}/>
       </>
     );
