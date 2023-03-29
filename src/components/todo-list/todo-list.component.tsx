@@ -5,19 +5,18 @@ import TodoItem from "../todo-item/todo.item.component";
 
 type Props = {
   data: Array<ItemProps>;
+  onRemoveItem: (event: React.MouseEvent) => void;
 }
 
-const TodoList = ({ data }: Props) =>
-
-  <React.Fragment>
+const TodoList = ({ data, onRemoveItem }: Props) =>
+  <div onClick={onRemoveItem}>
     {data.map((item) => (
       <React.Fragment key={item.id}>
         <TodoItem item={item} />
       <br/>
       </React.Fragment>
     ))}
-  </React.Fragment>
-;
+  </div>;
 
 export default TodoList;
 
