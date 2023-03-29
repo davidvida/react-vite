@@ -5,14 +5,15 @@ import TodoItem from "../todo-item/todo.item.component";
 
 type Props = {
   data: Array<ItemProps>;
+  onDeleteItem: Function;
 }
 
-const TodoList = ({ data }: Props) =>
+const TodoList = ({ data, onDeleteItem}: Props) =>
 
   <React.Fragment>
     {data.map((item) => (
       <React.Fragment key={item.id}>
-        <TodoItem item={item} />
+        <TodoItem item={item} onDelete={onDeleteItem} />
       <br/>
       </React.Fragment>
     ))}
