@@ -2,15 +2,12 @@ import React from "react";
 import { ItemProps } from "../../types/todo-item";
 
 type Props = {
-  item: ItemProps;
+  item: ItemProps
+  onRemoveItem: (id: number) => void
 }
 
-const TodoItem = ({item}: Props) => {
+const TodoItem = ({item, onRemoveItem}: Props) => {
   const { id, description, status } = item;
-
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-  }
 
   return (
     <div>
@@ -21,7 +18,7 @@ const TodoItem = ({item}: Props) => {
         {description}
       </span>&nbsp;
       <span>
-        <button onClick={handleRemoveItem}>x</button>
+        <button onClick={() => onRemoveItem(id)}>x</button>
       </span>
     </div>
 );
