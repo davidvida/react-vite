@@ -5,12 +5,8 @@ type Props = {
   item: ItemProps;
 }
 
-const TodoItem = ({item}: Props) => {
+const TodoItem = ({ item }: Props) => {
   const { id, description, status } = item;
-
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-  }
 
   return (
     <div>
@@ -18,13 +14,13 @@ const TodoItem = ({item}: Props) => {
         o
       </span>&nbsp;
       <span style={{ textDecoration: status === 'done' ? 'line-through' : '' }}>
-        {description}
+        {description + " " + id}
       </span>&nbsp;
       <span>
-        <button onClick={handleRemoveItem}>x</button>
+        <button id={item.id}>x</button>
       </span>
     </div>
-);
+  );
 }
 
 export default TodoItem;

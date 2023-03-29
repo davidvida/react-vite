@@ -5,19 +5,24 @@ import TodoItem from "../todo-item/todo.item.component";
 
 type Props = {
   data: Array<ItemProps>;
+  handleDeleteItem: (id: number) => void;
 }
 
-const TodoList = ({ data }: Props) =>
+const TodoList = ({ data, handleDeleteItem }: Props) => {
+  const handleDeleteButton = (e: any) =>
+  {
+    if (e.target.localName == 'button') handleDeleteItem(e.target.id);
+  }
 
-  <React.Fragment>
+  return <div onClick={handleDeleteButton}>
     {data.map((item) => (
-      <React.Fragment key={item.id}>
+      <div key={item.id}>
         <TodoItem item={item} />
-      <br/>
-      </React.Fragment>
+        <br />
+      </div>
     ))}
-  </React.Fragment>
-;
+  </div>;
+}
 
 export default TodoList;
 
