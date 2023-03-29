@@ -17,10 +17,11 @@ class TodoContainer extends React.Component<{}, StateProps> {
       data: staticData
     }
     this.handleAddNewItem = this.handleAddNewItem.bind(this);
+    this.onDeleteItem = this.onDeleteItem.bind(this);
   }
 
   handleAddNewItem() {
-    debugger;
+    //debugger;
     const newItem: ItemProps = {
       id: this.state.data.length + 1,
       description: 'New Item',
@@ -36,11 +37,16 @@ class TodoContainer extends React.Component<{}, StateProps> {
     });
   }
 
+  onDeleteItem = (id: number) => {
+    const updatedData = this.state.data.filter(item => item.id !== id);
+    this.setState({data: updatedData});
+  }
+
   render() {
     return (
       <>
         <Header dataLength={this.state.data.length} />
-        <TodoList data={this.state.data} />
+        <TodoList data={this.state.data} onDeleteItem={this.onDeleteItem} />
         <Footer onAddNewItem={this.handleAddNewItem}/>
       </>
     );
