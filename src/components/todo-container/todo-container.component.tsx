@@ -17,6 +17,7 @@ class TodoContainer extends React.Component<{}, StateProps> {
       data: staticData
     }
     this.handleAddNewItem = this.handleAddNewItem.bind(this);
+    this.handleRemoveItem = this.handleRemoveItem.bind(this)
   }
 
   handleAddNewItem() {
@@ -36,11 +37,20 @@ class TodoContainer extends React.Component<{}, StateProps> {
     });
   }
 
+  handleRemoveItem(identifier: number){
+    debugger;
+    const newData = this.state.data.filter((item)=> item.id!= identifier)
+    this.setState(()=>{
+      return { data: newData}
+    })
+  }
+
   render() {
     return (
       <>
         <Header dataLength={this.state.data.length} />
-        <TodoList data={this.state.data} />
+        <TodoList data={this.state.data} 
+        handleRemoveItem={this.handleRemoveItem}/>
         <Footer onAddNewItem={this.handleAddNewItem}/>
       </>
     );
