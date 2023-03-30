@@ -3,29 +3,24 @@ import { ItemProps } from "../../types/todo-item";
 
 type Props = {
   item: ItemProps;
-}
+  onRemoveItem: Function;
+};
 
-const TodoItem = ({item}: Props) => {
+const TodoItem = ({ item, onRemoveItem }: Props) => {
   const { id, description, status } = item;
-
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-  }
 
   return (
     <div>
-      <span>
-        o
-      </span>&nbsp;
-      <span style={{ textDecoration: status === 'done' ? 'line-through' : '' }}>
+      <span>o</span>&nbsp;
+      <span style={{ textDecoration: status === "done" ? "line-through" : "" }}>
         {description}
-      </span>&nbsp;
+      </span>
+      &nbsp;
       <span>
-        <button onClick={handleRemoveItem}>x</button>
+        <button onClick={() => onRemoveItem(id)}>x</button>
       </span>
     </div>
-);
-}
+  );
+};
 
 export default TodoItem;
-
