@@ -3,13 +3,15 @@ import { ItemProps } from "../../types/todo-item";
 
 type Props = {
   item: ItemProps;
+  onDelete: Function;
 }
 
-const TodoItem = ({item}: Props) => {
+const TodoItem = ({item, onDelete}: Props) => {
   const { id, description, status } = item;
 
-  const handleRemoveItem = () => {
+  const handleRemoveItem = (id: any) => {    
     console.log('dispatch the remove item action');
+    onDelete(id);
   }
 
   return (
@@ -21,7 +23,7 @@ const TodoItem = ({item}: Props) => {
         {description}
       </span>&nbsp;
       <span>
-        <button onClick={handleRemoveItem}>x</button>
+        <button onClick={() => handleRemoveItem(id)}>x</button>
       </span>
     </div>
 );
