@@ -3,9 +3,10 @@ import { ItemProps } from "../../types/todo-item";
 
 type Props = {
   item: ItemProps;
+  onSelectItem: (item: ItemProps) => void;
 }
 
-const TodoItem = ({item}: Props) => {
+const TodoItem = ({ item, onSelectItem }: Props) => {
   const { id, description, status } = item;
 
   const handleRemoveItem = () => {
@@ -17,7 +18,10 @@ const TodoItem = ({item}: Props) => {
       <span>
         o
       </span>&nbsp;
-      <span style={{ textDecoration: status === 'done' ? 'line-through' : '' }}>
+      <span
+        style={{ textDecoration: status === 'done' ? 'line-through' : '' }}
+        onClick={() => onSelectItem(item)}
+      >
         {description}
       </span>&nbsp;
       <span>

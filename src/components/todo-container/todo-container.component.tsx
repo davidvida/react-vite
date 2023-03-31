@@ -6,7 +6,8 @@ import Header from "../header/header.component";
 import TodoList from "../todo-list/todo-list.component";
 
 type StateProps = {
-  data: Array<ItemProps>
+  data: Array<ItemProps>;
+  activeItem: ItemProps | null;
 }
 
 class TodoContainer extends React.Component<{}, StateProps> {
@@ -14,9 +15,12 @@ class TodoContainer extends React.Component<{}, StateProps> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      data: staticData
+      data: staticData,
+      activeItem: null,
     }
     this.handleAddNewItem = this.handleAddNewItem.bind(this);
+    this.handleSelectItem = this.handleSelectItem.bind(this);
+    this.handleUpdateItem = this.handleUpdateItem.bind(this);
   }
 
   handleAddNewItem() {
@@ -36,11 +40,29 @@ class TodoContainer extends React.Component<{}, StateProps> {
     });
   }
 
+  handleSelectItem (item: ItemProps) {
+    this.setState(() => ({ activeItem: item }));
+  }
+
+  handleUpdateItem (id: number, itemData: Partial<ItemProps>) {
+    // ToDo update the item here
+    this.setState(prevState => ({
+      ...prevState,
+      activeItem: null,
+    }));
+  }
+
   render() {
+    const { data, activeItem } = this.state;
     return (
       <>
-        <Header dataLength={this.state.data.length} />
-        <TodoList data={this.state.data} />
+        <Header dataLength={data.length} />
+        <TodoList
+          data={data}
+          onSelectItem={this.handleSelectItem}
+          onUpdateItem={this.handleUpdateItem}
+          activeItem={activeItem}
+        />
         <Footer onAddNewItem={this.handleAddNewItem}/>
       </>
     );
