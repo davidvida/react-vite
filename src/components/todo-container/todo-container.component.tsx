@@ -24,7 +24,6 @@ class TodoContainer extends React.Component<{}, StateProps> {
   }
 
   handleAddNewItem() {
-    debugger;
     const newItem: ItemProps = {
       id: this.state.data.length + 1,
       description: 'New Item',
@@ -45,11 +44,15 @@ class TodoContainer extends React.Component<{}, StateProps> {
   }
 
   handleUpdateItem (id: number, itemData: Partial<ItemProps>) {
-    // ToDo update the item here
-    this.setState(prevState => ({
-      ...prevState,
+    const currentItemIndex = this.state.data.findIndex(item => item.id === id);
+    this.setState({
+      data: [
+        ...this.state.data.slice(0, currentItemIndex),
+        { ...this.state.data[currentItemIndex], ...itemData },
+        ...this.state.data.slice(currentItemIndex + 1),
+      ],
       activeItem: null,
-    }));
+    });
   }
 
   render() {

@@ -1,5 +1,4 @@
 import React from "react";
-import { staticData } from "../../data/items";
 import { ItemProps } from "../../types/todo-item";
 import TodoItemEdit from "../todo-item-edit/todo-item-edit.component";
 import TodoItem from "../todo-item/todo.item.component";
