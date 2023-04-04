@@ -1,5 +1,8 @@
 import React from "react";
-import { ItemProps } from "../../types/todo-item";
+import { ItemProps, ItemStatus } from "../../types/todo-item";
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import TodoItemStatus from "../todo-item-status/todo-item-status.component";
+import { TodoDescription, Wrapper } from "./todo-item.styles";
 
 type Props = {
   item: ItemProps;
@@ -14,20 +17,18 @@ const TodoItem = ({ item, onSelectItem }: Props) => {
   }
 
   return (
-    <div>
-      <span>
-        o
-      </span>&nbsp;
-      <span
-        style={{ textDecoration: status === 'done' ? 'line-through' : '' }}
+    <Wrapper>
+      <TodoItemStatus status={status}/>
+      <TodoDescription
+        style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
         onClick={() => onSelectItem(item)}
       >
         {description}
-      </span>&nbsp;
-      <span>
+      </TodoDescription>
+      {/* <span>
         <button onClick={handleRemoveItem}>x</button>
-      </span>
-    </div>
+      </span> */}
+    </Wrapper>
 );
 }
 
