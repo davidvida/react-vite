@@ -1,6 +1,6 @@
 import React from "react";
 import { staticData } from "../../data/items";
-import { ItemProps } from "../../types/todo-item";
+import { ItemProps, ItemStatus } from "../../types/todo-item";
 import Footer from "../footer/footer.component";
 import Header from "../header/header.component";
 import TodoList from "../todo-list/todo-list.component";
@@ -27,7 +27,7 @@ class TodoContainer extends React.Component<{}, StateProps> {
     const newItem: ItemProps = {
       id: this.state.data.length + 1,
       description: 'New Item',
-      status: 'inProgress'
+      status: ItemStatus.IN_PROGRESS
     };
 
     const newData = [

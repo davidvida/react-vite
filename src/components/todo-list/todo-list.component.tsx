@@ -19,7 +19,6 @@ const TodoList = ({ data, activeItem, onSelectItem, onUpdateItem }: Props) =>
           <TodoItemEdit item={item} onUpdateItem={onUpdateItem}  /> :
             <TodoItem item={item} onSelectItem={onSelectItem} />
         }
-      <br/>
       </React.Fragment>
     ))}
   </React.Fragment>
