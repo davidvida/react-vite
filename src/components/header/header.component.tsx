@@ -1,11 +1,16 @@
 import React from "react";
-import { ItemProps } from "../../types/todo-item";
+import CalendarIcon from "../calendar-icon/calendar-icon-component";
+import { Stack } from "@mui/material";
+import Title from "../title/title-component";
 
-type Props = {
-  dataLength: number;
-}
-
-const Header = ({dataLength}: Props) => <h3>Header ({dataLength})</h3>;
+const Header = () => {
+  return (
+    <Stack direction="row" alignItems="center" marginTop="30px" marginBottom="32px">
+      <CalendarIcon />
+      <Title />
+    </Stack>
+  )
+};
 
 export default Header;
 
