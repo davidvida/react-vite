@@ -59,7 +59,7 @@ class TodoContainer extends React.Component<{}, StateProps> {
     const { data, activeItem } = this.state;
     return (
       <>
-        <Header dataLength={data.length} />
+        <Header />
         <TodoList
           data={data}
           onSelectItem={this.handleSelectItem}
