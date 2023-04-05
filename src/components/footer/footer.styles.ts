@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const AddIcon = styled(AddCircleOutlineIcon)`
   color: #3D82EB;
-  widht: 12px;
+  width: 12px;
   height: 12px;
   margin-right: 16px;
 `
