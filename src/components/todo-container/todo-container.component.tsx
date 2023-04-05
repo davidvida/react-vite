@@ -1,6 +1,6 @@
 import React from "react";
 import { staticData } from "../../data/items";
-import { ItemProps, ItemStatus } from "../../types/todo-item";
+import { ItemProps } from "../../types/todo-item";
 import Footer from "../footer/footer.component";
 import Header from "../header/header.component";
 import TodoList from "../todo-list/todo-list.component";
@@ -8,6 +8,7 @@ import TodoList from "../todo-list/todo-list.component";
 type StateProps = {
   data: Array<ItemProps>;
   activeItem: ItemProps | null;
+  loading: boolean;
 }
 
 class TodoContainer extends React.Component<{}, StateProps> {
@@ -15,28 +16,12 @@ class TodoContainer extends React.Component<{}, StateProps> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      data: staticData,
+      data: [],
       activeItem: null,
+      loading: false,
     }
-    this.handleAddNewItem = this.handleAddNewItem.bind(this);
     this.handleSelectItem = this.handleSelectItem.bind(this);
     this.handleUpdateItem = this.handleUpdateItem.bind(this);
-  }
-
-  handleAddNewItem() {
-    const newItem: ItemProps = {
-      id: this.state.data.length + 1,
-      description: 'New Item',
-      status: ItemStatus.IN_PROGRESS
-    };
-
-    const newData = [
-      ...this.state.data,
-      newItem
-    ];
-    this.setState(() => {
-      return {data: newData};
-    });
   }
 
   handleSelectItem (item: ItemProps) {
@@ -55,18 +40,30 @@ class TodoContainer extends React.Component<{}, StateProps> {
     });
   }
 
+  componentDidMount() {
+    this.setState({
+      data: staticData
+    });
+  }
+
+  /*
+    actions
+    - Load all the items
+    - Add a new Item
+    - Update an Item
+  */
+
   render() {
     const { data, activeItem } = this.state;
     return (
       <>
-        <Header dataLength={data.length} />
+        <Header />
         <TodoList
-          data={data}
           onSelectItem={this.handleSelectItem}
           onUpdateItem={this.handleUpdateItem}
           activeItem={activeItem}
         />
-        <Footer onAddNewItem={this.handleAddNewItem}/>
+        <Footer />
       </>
     );
   }

@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../context/app-context";
+import { Types } from "../../reducer/actions";
 import { AddIcon, AddText, Wrapper } from "./footer.styles";
 
-type Props = {
-  onAddNewItem: () => void;
-}
-
-const Footer = ({ onAddNewItem }: Props) => {
+const Footer = () => {
+  const { dispatch } = useContext(AppContext);
 
   const handleClick = () => {
-    console.log('Add Item');
-    onAddNewItem();
+    dispatch({ type: Types.Add });
   }
 
   return (
@@ -17,9 +15,7 @@ const Footer = ({ onAddNewItem }: Props) => {
       <AddIcon/>
       <AddText>Add new Item</AddText>
     </Wrapper>
-
   )
 };
 
 export default Footer;
-
