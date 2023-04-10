@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ItemProps, ItemStatus } from "../../types/todo-item";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
 import { TodoDescription, Wrapper } from "./todo-item.styles";
+import { AppContext } from "../../context/app-context";
+import { Types } from "../../reducer/actions";
 
 type Props = {
   item: ItemProps;
@@ -10,6 +12,8 @@ type Props = {
 }
 
 const TodoItem = ({ item, onSelectItem }: Props) => {
+  const { dispatch } = useContext(AppContext);
+
   const { id, description, status } = item;
 
   const handleRemoveItem = () => {
@@ -21,7 +25,7 @@ const TodoItem = ({ item, onSelectItem }: Props) => {
       <TodoItemStatus status={status}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
-        onClick={() => onSelectItem(item)}
+        onClick={() => dispatch({ type: Types.Select, payload: { item }  })}
       >
         {description}
       </TodoDescription>

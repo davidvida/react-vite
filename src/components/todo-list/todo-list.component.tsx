@@ -22,7 +22,7 @@ const TodoList = ({ activeItem, onSelectItem, onUpdateItem }: Props) => {
     <React.Fragment>
       {state?.data.map((item: ItemProps) => (
         <React.Fragment key={item.id}>
-          { activeItem?.id === item.id ? 
+          { state.activeItem?.id === item.id ? 
             <TodoItemEdit item={item} onUpdateItem={onUpdateItem}  /> :
               <TodoItem item={item} onSelectItem={onSelectItem} />
           }
