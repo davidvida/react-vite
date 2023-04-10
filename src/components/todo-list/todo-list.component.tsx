@@ -7,11 +7,9 @@ import TodoItem from "../todo-item/todo.item.component";
 
 type Props = {
   activeItem: ItemProps | null;
-  onSelectItem: (item: ItemProps) => void;
-  onUpdateItem: (id: number, itemData: Partial<ItemProps>) => void;
 }
 
-const TodoList = ({ activeItem, onSelectItem, onUpdateItem }: Props) => {
+const TodoList = ({ activeItem }: Props) => {
   const { state, dispatch } = useContext(AppContext);
 
   useEffect(() => {
@@ -22,9 +20,9 @@ const TodoList = ({ activeItem, onSelectItem, onUpdateItem }: Props) => {
     <React.Fragment>
       {state?.data.map((item: ItemProps) => (
         <React.Fragment key={item.id}>
-          { activeItem?.id === item.id ? 
-            <TodoItemEdit item={item} onUpdateItem={onUpdateItem}  /> :
-              <TodoItem item={item} onSelectItem={onSelectItem} />
+          { state.activeItem?.id === item.id ? 
+            <TodoItemEdit item={item} /> :
+              <TodoItem item={item} />
           }
         </React.Fragment>
       ))}

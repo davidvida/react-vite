@@ -20,24 +20,6 @@ class TodoContainer extends React.Component<{}, StateProps> {
       activeItem: null,
       loading: false,
     }
-    this.handleSelectItem = this.handleSelectItem.bind(this);
-    this.handleUpdateItem = this.handleUpdateItem.bind(this);
-  }
-
-  handleSelectItem (item: ItemProps) {
-    this.setState(() => ({ activeItem: item }));
-  }
-
-  handleUpdateItem (id: number, itemData: Partial<ItemProps>) {
-    const currentItemIndex = this.state.data.findIndex(item => item.id === id);
-    this.setState({
-      data: [
-        ...this.state.data.slice(0, currentItemIndex),
-        { ...this.state.data[currentItemIndex], ...itemData },
-        ...this.state.data.slice(currentItemIndex + 1),
-      ],
-      activeItem: null,
-    });
   }
 
   componentDidMount() {
@@ -59,8 +41,6 @@ class TodoContainer extends React.Component<{}, StateProps> {
       <>
         <Header />
         <TodoList
-          onSelectItem={this.handleSelectItem}
-          onUpdateItem={this.handleUpdateItem}
           activeItem={activeItem}
         />
         <Footer />

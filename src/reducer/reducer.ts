@@ -5,7 +5,7 @@ import { StateProps } from "./initial-state";
 
 const reducer = (state: StateProps, action: any) => {
   // handle logic of the application here
-  debugger;
+  //debugger;
   switch(action.type) {
     case Types.Load: {
       return {
@@ -22,6 +22,27 @@ const reducer = (state: StateProps, action: any) => {
       return {
         ...state,
         data: [...state.data, newItem],
+      }
+    }
+    case Types.Update: {
+      const { payload } = action;
+      const currentItemIndex = state.data.findIndex(item => item.id === payload.id);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, currentItemIndex),
+          { ...state.data[currentItemIndex], ...payload.itemData },
+          ...state.data.slice(currentItemIndex + 1),
+        ],
+        activeItem: null
+      };
+    }
+    case Types.Select: {
+      const { payload } = action;
+      const currentItemIndex = state.data.findIndex(item => item.id === payload.id);
+      return {
+        ...state,
+        activeItem: state.data[currentItemIndex]
       }
     }
     default: return state;
