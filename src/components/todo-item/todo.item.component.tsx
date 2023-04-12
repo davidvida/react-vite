@@ -22,7 +22,7 @@ const TodoItem = ({ item, onSelectItem }: Props) => {
 
   return (
     <Wrapper>
-      <TodoItemStatus status={status}/>
+      <TodoItemStatus status={status} id={item.id}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
         onClick={() => dispatch({ type: Types.Select, payload: { item }  })}
