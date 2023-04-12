@@ -15,7 +15,7 @@ const reducer = (state: StateProps, action: any) => {
     }
     case Types.Add: {
       const newItem: ItemProps = {
-        id: state.data.length + 1,
+        id: state.data[state.data.length - 1].id + 1,
         description: 'New Item',
         status: ItemStatus.IN_PROGRESS
       };
@@ -43,6 +43,13 @@ const reducer = (state: StateProps, action: any) => {
       return {
         ...state,
         activeItem: state.data[currentItemIndex]
+      }
+    }
+    case Types.Remove: {
+      const {payload} = action;
+      return {
+        ...state,
+        data: state.data.filter(item => item.id != payload)
       }
     }
     default: return state;

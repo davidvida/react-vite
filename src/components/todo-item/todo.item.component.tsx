@@ -14,25 +14,31 @@ const TodoItem = ({ item }: Props) => {
   const { dispatch } = useContext(AppContext);
   const { id, description, status } = item;
 
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
+  const handleRemoveItem = (id: number) => {
+    dispatch({ 
+      type: Types.Remove,
+      payload: id
+    })
   }
 
   return (
     <Wrapper>
-      <TodoItemStatus status={status} id={item.id}/>
+      <TodoItemStatus status={status} id={id}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
-        onClick={() => dispatch({ type: Types.Select, payload: {
-          id: item.id
-        } 
-      })}
+        onClick={() => dispatch({ 
+          type: Types.Select,
+          payload: {
+              id: id
+            } 
+          })
+        }
       >
         {description}
       </TodoDescription>
-      {/* <span>
-        <button onClick={handleRemoveItem}>x</button>
-      </span> */}
+      <span>
+        <button onClick={() => handleRemoveItem(item.id)}>x</button>
+      </span>
     </Wrapper>
 );
 }
