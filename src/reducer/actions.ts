@@ -16,7 +16,8 @@ export enum Types {
   Load = 'LOAD_TODO_ITEMS',
   Add = 'ADD_NEW_TODO_ITEM',
   Update ='UPDATE_TODO_ITEM',
-  Select = 'SELECT_TODO_ITEM'
+  Select = 'SELECT_TODO_ITEM',
+  Remove = 'REMOVE_TODO_ITEM'
 };
 
 
@@ -25,6 +26,7 @@ export type ItemPayload = {
   [Types.Add]: undefined;
   [Types.Update]: { id: number, itemData: Partial<ItemProps> };
   [Types.Select]: { id: number };
+  [Types.Remove]: { id: number };
 };
 
 export type ItemActions = ActionMap<ItemPayload>[keyof ActionMap<

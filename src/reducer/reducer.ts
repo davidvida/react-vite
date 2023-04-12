@@ -45,6 +45,14 @@ const reducer = (state: StateProps, action: any) => {
         activeItem: state.data[currentItemIndex]
       }
     }
+    case Types.Remove: {
+      const { payload } = action;
+      const deletedData = state.data.filter((item)=>item.id !== payload.id);
+      return {
+        ...state,
+        data: deletedData,
+      }
+    }
     default: return state;
   }
 }

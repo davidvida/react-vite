@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ItemProps, ItemStatus } from "../../types/todo-item";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
-import { TodoDescription, Wrapper } from "./todo-item.styles";
+import { TodoDescription, TodoRemove, Wrapper } from "./todo-item.styles";
 import { AppContext } from "../../context/app-context";
 import { Types } from "../../reducer/actions";
 
@@ -14,9 +14,9 @@ const TodoItem = ({ item }: Props) => {
   const { dispatch } = useContext(AppContext);
   const { id, description, status } = item;
 
-  const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-  }
+  // const handleRemoveItem = () => {
+  //   console.log('dispatch the remove item action');
+  // }
 
   return (
     <Wrapper>
@@ -30,9 +30,10 @@ const TodoItem = ({ item }: Props) => {
       >
         {description}
       </TodoDescription>
-      {/* <span>
-        <button onClick={handleRemoveItem}>x</button>
-      </span> */}
+      <TodoRemove onClick={() => dispatch({ type: Types.Remove, payload: {
+          id: item.id
+        }})}>
+      </TodoRemove>
     </Wrapper>
 );
 }
