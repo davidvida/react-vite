@@ -29,7 +29,7 @@ const TodoItemEdit = ({ item }: Props) => {
 
   return (
     <Wrapper>
-      <TodoItemStatus status={item.status}/>
+      <TodoItemStatus status={item.status} id={item.id}/>
       <form style={{ display: 'inline' }} onSubmit={handleUpdateItem}>
         {/* <input type="text" name="description" value={value} onChange={handleChangeDescription} /> */}
         <CustomTextField
