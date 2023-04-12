@@ -5,6 +5,7 @@ import TodoItemStatus from "../todo-item-status/todo-item-status.component";
 import { TodoDescription, Wrapper } from "./todo-item.styles";
 import { AppContext } from "../../context/app-context";
 import { Types } from "../../reducer/actions";
+import TodoItemDelete from "../todo-item-delete/todo-item-delete.component";
 
 type Props = {
   item: ItemProps;
@@ -20,7 +21,7 @@ const TodoItem = ({ item }: Props) => {
 
   return (
     <Wrapper>
-      <TodoItemStatus status={status}/>
+      <TodoItemStatus id={id} status={status}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
         onClick={() => dispatch({ type: Types.Select, payload: {
@@ -30,9 +31,7 @@ const TodoItem = ({ item }: Props) => {
       >
         {description}
       </TodoDescription>
-      {/* <span>
-        <button onClick={handleRemoveItem}>x</button>
-      </span> */}
+      <TodoItemDelete id={id} />
     </Wrapper>
 );
 }
