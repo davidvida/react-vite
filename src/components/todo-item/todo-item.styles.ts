@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,3 +14,12 @@ export const Wrapper = styled.div`
 export const TodoDescription = styled.div`
   font-size: 10px;
 `
+
+export const TodoRemove = styled(HighlightOffIcon)`
+  margin-left: 20px;
+  width: 12px;
+  height: 12px;
+  &:hover{
+    color: #EB3D3D;
+  }
+`;
