@@ -14,8 +14,10 @@ const reducer = (state: StateProps, action: any) => {
       };
     }
     case Types.Add: {
+      const id = state.data.length > 0 
+      ? state.data[state.data.length - 1].id + 1 : 1;
       const newItem: ItemProps = {
-        id: state.data[state.data.length - 1].id + 1,
+        id: id,
         description: 'New Item',
         status: ItemStatus.IN_PROGRESS
       };
