@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { Types } from "../../reducer/actions";
 import { ItemProps } from "../../types/todo-item";
 import TodoItemEdit from "../todo-item-edit/todo-item-edit.component";
 import TodoItem from "../todo-item/todo.item.component";
 import { useSelector, useDispatch } from 'react-redux';
+import { todoActions } from "../../slices/todos/todoSlice";
+import { RootState } from "../../store/store";
 
 type Props = {}
 
 const TodoList = ({}: Props) => {
-  const data = useSelector((state: any) => state.data);
-  const activeItem = useSelector((state: any) => state.activeItem);
+  const { data, activeItem } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: Types.Load });
+    dispatch(todoActions.load());
   }, []);
 
   return (

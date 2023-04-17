@@ -6,6 +6,7 @@ import { Types } from "../../reducer/actions";
 import { useDispatch } from "react-redux";
 import { RemoveCircle } from '@mui/icons-material';
 import { IconButton } from "@mui/material";
+import { todoActions } from "../../slices/todos/todoSlice";
 
 type Props = {
   item: ItemProps;
@@ -17,12 +18,10 @@ const TodoItem = ({ item }: Props) => {
 
 
   const handleRemoveItem = () => {
-    console.log('dispatch the remove item action');
-    dispatch({ type: Types.Delete, payload: item.id });
+    dispatch(todoActions.remove(item.id));
   }
 
   const handleSelectItem = () => {
-    console.log('dispatch the select item action');
     dispatch({ type: Types.Select, payload: item.id });
   }
 
