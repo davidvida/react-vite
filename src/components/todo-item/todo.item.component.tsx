@@ -22,7 +22,7 @@ const TodoItem = ({ item }: Props) => {
   }
 
   const handleSelectItem = () => {
-    dispatch({ type: Types.Select, payload: item.id });
+    dispatch(todoActions.select(item.id));
   }
 
   return (

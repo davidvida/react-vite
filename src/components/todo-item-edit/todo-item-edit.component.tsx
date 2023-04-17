@@ -5,6 +5,7 @@ import { ItemProps } from "../../types/todo-item";
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
 import { CustomTextField, Wrapper } from "./todo-item-edit.styles";
 import { useDispatch } from 'react-redux';
+import { todoActions } from "../../slices/todos/todoSlice";
 
 type Props = {
   item: ItemProps;
@@ -16,12 +17,7 @@ const TodoItemEdit = ({ item }: Props) => {
 
   const handleUpdateItem = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch({
-      type: Types.Update,
-      payload: {
-        id: item.id, dataUpdated: { description: value }
-      }
-    });
+    dispatch(todoActions.update({id: item.id, dataUpdated: {description: value}}));
   }
 
   const handleChangeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
