@@ -13,7 +13,6 @@ const reducer = (state: StateProps, action: any) => {
       };
     }
     case Types.Add: {
-      debugger;
       const newItem: ItemProps = {
         id: state.data.length + 1,
         description: 'New Item',
@@ -25,7 +24,6 @@ const reducer = (state: StateProps, action: any) => {
       }
     }
     case Types.Update: {
-      debugger;
       const selectItemIndex = state.data.findIndex(item => item.id === action.payload.id);
       return {
         ...state,

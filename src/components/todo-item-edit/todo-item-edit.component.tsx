@@ -16,8 +16,6 @@ const TodoItemEdit = ({ item }: Props) => {
 
   const handleUpdateItem = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // onUpdateItem(item.id, { description: value });
-    debugger;
     dispatch({
       type: Types.Update,
       payload: {

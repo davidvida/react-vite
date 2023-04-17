@@ -7,7 +7,6 @@ const Footer = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    debugger;
     dispatch({ type: Types.Add });
   }
 

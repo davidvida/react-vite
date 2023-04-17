@@ -13,8 +13,15 @@ const TodoItemStatus = ({ item }: Props) => {
   const dispatch =  useDispatch();
 
   const handleUpdateStatus = () => {
-    debugger;
-    dispatch({ type: Types.Update, payload: { id: item.id, dataUpdated: { status: item.status === ItemStatus.IN_PROGRESS ? ItemStatus.DONE : ItemStatus.IN_PROGRESS }} })
+    dispatch({
+      type: Types.Update,
+      payload: {
+        id: item.id,
+        dataUpdated: {
+          status: item.status === ItemStatus.IN_PROGRESS ? ItemStatus.DONE : ItemStatus.IN_PROGRESS
+        }
+      }
+    });
   }
 
   return (
