@@ -12,12 +12,28 @@ type Props = {
 const TodoList = ({ activeItem }: Props) => {
   const { state, dispatch } = useContext(AppContext);
 
+  const onRemoveItem = (event: React.MouseEvent) => {
+    const button = event.target;
+
+    if (button instanceof SVGElement) {
+      const { action, index: id } = button.dataset;
+      if (action === 'delete' && id) {
+        dispatch({
+          type: Types.Delete,
+          payload: {
+            id: parseInt(id)
+          }
+        });
+      } 
+    }
+  }
+
   useEffect(() => {
     dispatch({ type: Types.Load })
   }, []);
 
   return (
-    <React.Fragment>
+    <div onClick={onRemoveItem}>
       {state?.data.map((item: ItemProps) => (
         <React.Fragment key={item.id}>
           { state.activeItem?.id === item.id ? 
@@ -26,7 +42,7 @@ const TodoList = ({ activeItem }: Props) => {
           }
         </React.Fragment>
       ))}
-    </React.Fragment>
+    </div>
   );
 };
 
