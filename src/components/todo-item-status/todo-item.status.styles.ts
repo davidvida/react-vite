@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
+export const StatusContainer = styled.div`
+  cursor: pointer;
+`;
+
 export const InProgressStatus = styled(RadioButtonUncheckedIcon)`
   color: #CBCBCB;
   margin-right: 20px;

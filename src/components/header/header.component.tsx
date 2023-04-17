@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box } from "@mui/system";
-import { AppContext } from "../../context/app-context";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { state } = useContext(AppContext);
+  const data = useSelector((state: any) => state.data);
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
-      <h3 style={{ margin: 0 }} >Header ({state.data.length})</h3>
+      <h3 style={{ margin: 0 }} >Header ({data.length})</h3>
     </Box>
   );
 };

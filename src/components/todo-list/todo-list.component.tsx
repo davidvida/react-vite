@@ -1,26 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import { AppContext } from "../../context/app-context";
+import React, { useEffect } from "react";
 import { Types } from "../../reducer/actions";
 import { ItemProps } from "../../types/todo-item";
 import TodoItemEdit from "../todo-item-edit/todo-item-edit.component";
 import TodoItem from "../todo-item/todo.item.component";
+import { useSelector, useDispatch } from 'react-redux';
 
-type Props = {
-  activeItem: ItemProps | null;
-}
+type Props = {}
 
-const TodoList = ({ activeItem }: Props) => {
-  const { state, dispatch } = useContext(AppContext);
+const TodoList = ({}: Props) => {
+  const data = useSelector((state: any) => state.data);
+  const activeItem = useSelector((state: any) => state.activeItem);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: Types.Load })
+    dispatch({ type: Types.Load });
   }, []);
 
   return (
     <React.Fragment>
-      {state?.data.map((item: ItemProps) => (
+      {data.map((item: ItemProps) => (
         <React.Fragment key={item.id}>
-          { state.activeItem?.id === item.id ? 
+          { activeItem?.id === item.id ? 
             <TodoItemEdit item={item} /> :
               <TodoItem item={item} />
           }

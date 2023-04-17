@@ -1,38 +1,43 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ItemProps, ItemStatus } from "../../types/todo-item";
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
-import { TodoDescription, Wrapper } from "./todo-item.styles";
-import { AppContext } from "../../context/app-context";
+import { ButtonContainer, IconRemove, TodoDescription, Wrapper } from "./todo-item.styles";
 import { Types } from "../../reducer/actions";
+import { useDispatch } from "react-redux";
+import { RemoveCircle } from '@mui/icons-material';
+import { IconButton } from "@mui/material";
 
 type Props = {
   item: ItemProps;
 }
 
 const TodoItem = ({ item }: Props) => {
-  const { dispatch } = useContext(AppContext);
+  const dispatch = useDispatch();
   const { id, description, status } = item;
+
 
   const handleRemoveItem = () => {
     console.log('dispatch the remove item action');
+    dispatch({ type: Types.Delete, payload: item.id });
+  }
+
+  const handleSelectItem = () => {
+    console.log('dispatch the select item action');
+    dispatch({ type: Types.Select, payload: item.id });
   }
 
   return (
     <Wrapper>
-      <TodoItemStatus status={status}/>
+      <TodoItemStatus item={item}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}
-        onClick={() => dispatch({ type: Types.Select, payload: {
-          id: item.id
-        } 
-      })}
+        onClick={handleSelectItem}
       >
         {description}
       </TodoDescription>
-      {/* <span>
-        <button onClick={handleRemoveItem}>x</button>
-      </span> */}
+      <ButtonContainer onClick={handleRemoveItem} size="small" data-action='remove' title="Remove Todo">
+        <IconRemove />
+      </ButtonContainer>
     </Wrapper>
 );
 }

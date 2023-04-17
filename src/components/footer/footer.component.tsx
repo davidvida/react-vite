@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
-import { AppContext } from "../../context/app-context";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Types } from "../../reducer/actions";
 import { AddIcon, AddText, Wrapper } from "./footer.styles";
 
 const Footer = () => {
-  const { dispatch } = useContext(AppContext);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
+    debugger;
     dispatch({ type: Types.Add });
   }
 

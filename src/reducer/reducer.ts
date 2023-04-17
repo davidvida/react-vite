@@ -1,11 +1,10 @@
 import { staticData } from "../data/items";
 import { ItemProps, ItemStatus } from "../types/todo-item";
-import { Types } from "./actions";
+import { Types, ItemActions } from "./actions";
 import { StateProps } from "./initial-state";
 
 const reducer = (state: StateProps, action: any) => {
   // handle logic of the application here
-  //debugger;
   switch(action.type) {
     case Types.Load: {
       return {
@@ -14,6 +13,7 @@ const reducer = (state: StateProps, action: any) => {
       };
     }
     case Types.Add: {
+      debugger;
       const newItem: ItemProps = {
         id: state.data.length + 1,
         description: 'New Item',
@@ -25,25 +25,34 @@ const reducer = (state: StateProps, action: any) => {
       }
     }
     case Types.Update: {
-      const { payload } = action;
-      const currentItemIndex = state.data.findIndex(item => item.id === payload.id);
+      debugger;
+      const selectItemIndex = state.data.findIndex(item => item.id === action.payload.id);
       return {
         ...state,
         data: [
-          ...state.data.slice(0, currentItemIndex),
-          { ...state.data[currentItemIndex], ...payload.itemData },
-          ...state.data.slice(currentItemIndex + 1),
+          ...state.data.slice(0, selectItemIndex),
+          { ...state.data[selectItemIndex], ...action.payload.dataUpdated },
+          ...state.data.slice(selectItemIndex + 1),
         ],
-        activeItem: null
+        activeItem: null,
       };
     }
     case Types.Select: {
-      const { payload } = action;
-      const currentItemIndex = state.data.findIndex(item => item.id === payload.id);
+      const selectItemIndex = state.data.findIndex(item => item.id === action.payload);
       return {
         ...state,
-        activeItem: state.data[currentItemIndex]
-      }
+        activeItem: state.data[selectItemIndex]
+      };
+    }
+    case Types.Delete: {
+      const selectItemIndex = state.data.findIndex(item => item.id === action.payload);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, selectItemIndex),
+          ...state.data.slice(selectItemIndex + 1),
+        ],
+      };
     }
     default: return state;
   }

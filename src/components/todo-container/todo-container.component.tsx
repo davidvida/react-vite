@@ -1,5 +1,5 @@
+import { Container } from "@mui/material";
 import React from "react";
-import { staticData } from "../../data/items";
 import { ItemProps } from "../../types/todo-item";
 import Footer from "../footer/footer.component";
 import Header from "../header/header.component";
@@ -12,39 +12,13 @@ type StateProps = {
 }
 
 class TodoContainer extends React.Component<{}, StateProps> {
-
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      data: [],
-      activeItem: null,
-      loading: false,
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      data: staticData
-    });
-  }
-
-  /*
-    actions
-    - Load all the items
-    - Add a new Item
-    - Update an Item
-  */
-
   render() {
-    const { data, activeItem } = this.state;
     return (
-      <>
+      <Container maxWidth="xs">
         <Header />
-        <TodoList
-          activeItem={activeItem}
-        />
+        <TodoList />
         <Footer />
-      </>
+      </Container>
     );
   }
 }
