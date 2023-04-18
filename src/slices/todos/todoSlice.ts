@@ -30,32 +30,17 @@ const todoSlice = createSlice({
   initialState: initialState,
   reducers: {
     fetching: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        loading: action.payload
-      };
+      state.loading = action.payload
     },
     load: (state, action: PayloadAction<ItemProps[]>) => {
-      return {
-        ...state,
-        data: action.payload
-      };
+      state.data = action.payload
     },
     add: (state, action: PayloadAction<ItemProps>) => {
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-      }
+      state.data.push(action.payload);
     },
     remove: (state, action: PayloadAction<string>) => {
       const selectItemIndex = state.data.findIndex(item => item.id === action.payload);
-      return {
-        ...state,
-        data: [
-          ...state.data.slice(0, selectItemIndex),
-          ...state.data.slice(selectItemIndex + 1),
-        ],
-      };
+      state.data.splice(selectItemIndex, 1);
     }
   },
   extraReducers: (builder) => {

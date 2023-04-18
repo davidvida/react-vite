@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ItemProps, ItemStatus } from "../../types/todo-item";
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
 import { ButtonContainer, IconRemove, TodoDescription, Wrapper } from "./todo-item.styles";
 import { Types } from "../../reducer/actions";
 import { useDispatch } from "react-redux";
-import { RemoveCircle } from '@mui/icons-material';
-import { IconButton } from "@mui/material";
 import { todoActions } from "../../slices/todos/todoSlice";
 
 type Props = {
