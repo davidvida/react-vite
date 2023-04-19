@@ -5,16 +5,22 @@ import TodoItem from "../todo-item/todo.item.component";
 import { useSelector, useDispatch } from 'react-redux';
 import { todoActions } from "../../slices/todos/todoSlice";
 import { RootState } from "../../store/store";
+import { useGetAllTodosQuery } from "../../api/todos-api";
+import { normalizeTodoData } from "../../utils/normailize-todo";
 
 type Props = {}
 
 const TodoList = ({}: Props) => {
   const { data, activeItem } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
+  const { data: todosData } = useGetAllTodosQuery('');
 
   useEffect(() => {
-    dispatch(todoActions.load());
-  }, []);
+    if (todosData) {
+      const dataNormalized = normalizeTodoData(todosData);
+      dispatch(todoActions.load(dataNormalized));
+    }
+  }, [todosData]);
 
   return (
     <React.Fragment>
