@@ -1,6 +1,6 @@
 import { staticData } from "../data/items";
 import { ItemProps, ItemStatus } from "../types/todo-item";
-import { Types, ItemActions } from "./actions";
+import { Types } from "./actions";
 import { StateProps } from "./initial-state";
 
 const reducer = (state: StateProps, action: any) => {
@@ -14,7 +14,7 @@ const reducer = (state: StateProps, action: any) => {
     }
     case Types.Add: {
       const newItem: ItemProps = {
-        id: state.data.length + 1,
+        id: String(state.data.length + 1),
         description: 'New Item',
         status: ItemStatus.IN_PROGRESS
       };

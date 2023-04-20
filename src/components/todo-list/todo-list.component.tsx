@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { ItemProps } from "../../types/todo-item";
 import TodoItemEdit from "../todo-item-edit/todo-item-edit.component";
 import TodoItem from "../todo-item/todo.item.component";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { fetchTodos, todoActions } from "../../slices/todos/todoSlice";
-import { RootState } from "../../store/store";
-import { useGetAllTodosQuery } from "../../api/todos-api";
-import { normalizeTodoData } from "../../utils/normailize-todo";
+import { AppDispatch, RootState } from "../../store/store";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from "@mui/system";
 
@@ -14,10 +12,10 @@ type Props = {}
 
 const TodoList = ({}: Props) => {
   const { data, activeItem, loading } = useSelector((state: RootState) => state.todo);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   
   useEffect(() => {
-    dispatch(fetchTodos({}));
+    dispatch(fetchTodos());
   }, []);
 
   return (

@@ -11,11 +11,11 @@ import { initialState } from "./initial-state";
 
 export const fetchTodos = createAsyncThunk(
   'todos/fetchTodos',
-  async (params: {}, thunkApi) => {
-    // thunkApi.dispatch(todoActions.fetching(true));
+  async (params: undefined, thunkApi) => {
     const response = await fetch(`${API_BASE_URL}${TODO_PREFIX}`);
     const data = await response.json();
     thunkApi.dispatch(normalizeTodos(data));
+    return data;
 });
 
 export const normalizeTodos = createAsyncThunk(
