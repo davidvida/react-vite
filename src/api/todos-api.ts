@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ItemProps, ItemPropsMongo } from "../types/todo-item";
 
-const API_BASE_URL = 'https://todo-service-0qq0.onrender.com/api/v1/';
-const TODO_PREFIX = 'todos';
+export const API_BASE_URL = 'https://todo-service-0qq0.onrender.com/api/v1/';
+export const TODO_PREFIX = 'todos';
 
 export const todosApi = createApi({
   reducerPath: 'todoApi',
@@ -21,10 +21,9 @@ export const todosApi = createApi({
       query: (body) => ({
         url: TODO_PREFIX,
         method: 'POST',
-        body: {}
+        body: body
       }),
       invalidatesTags: [{ type: 'Todos', id: 'LIST' }]
-
     }),
   })
 });

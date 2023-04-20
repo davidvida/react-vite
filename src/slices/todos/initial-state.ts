@@ -9,5 +9,5 @@ export type StateProps = {
 export const initialState: StateProps = {
   data: [],
   activeItem: null,
-  loading: true,
+  loading: false,
 };
