@@ -25,6 +25,15 @@ export const normalizeTodos = createAsyncThunk(
     thunkApi.dispatch(todoActions.load(dataNormalized));
 });
 
+// export const addTodos = createAsyncThunk(
+//   'todos/add',
+//   async (todo: ItemProps, thunkApi)=>{
+//     const response = await fetch(`${API_BASE_URL}${TODO_PREFIX}`, {method: "POST", body: JSON.stringify(todo)});
+//     const data = await response.json();
+//     const dataNormalized = normalizeTodoData([data])[0];
+//     thunkApi.dispatch(todoActions.add(dataNormalized));
+// });
+
 const todoSlice = createSlice({
   name: 'todo',
   initialState: initialState,
@@ -55,6 +64,18 @@ const todoSlice = createSlice({
     builder.addCase(normalizeTodos.pending, (state, action) => {
       state.loading = false;
     });
+    // builder.addCase(addTodos.pending, (state, action) => {
+    //   debugger;
+    //   state.loading = true;
+    // });
+    // builder.addCase(addTodos.fulfilled, (state, action) => {
+    //   debugger;
+    //   state.loading = false;
+    // });
+    // builder.addCase(addTodos.rejected, (state, action) => {
+    //   debugger;
+    //   state.loading = false;
+    // });
   }
 });
 

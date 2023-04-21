@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAddTodoMutation } from "../../api/todos-api";
 import { Types } from "../../reducer/actions";
@@ -6,28 +6,46 @@ import { todoActions } from "../../slices/todos/todoSlice";
 import { ItemPropsMongo, ItemStatus } from "../../types/todo-item";
 import { normalizeTodoData } from "../../utils/normailize-todo";
 import { AddIcon, AddText, Wrapper } from "./footer.styles";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Box } from "@mui/system";
 
 const Footer = () => {
   const dispatch = useDispatch();
-  const [addTodoMutation] = useAddTodoMutation();
+  const [addTodoMutation, { isLoading, data }] = useAddTodoMutation();
 
   const handleClick = async () => {
-    try {
-      const response = await addTodoMutation({ description: 'new Item', status: ItemStatus.IN_PROGRESS });
-      dispatch(todoActions.add(normalizeTodoData([response.data as ItemPropsMongo])[0]));
-    } catch(error: any) {
-      if (error instanceof Error) {
-        console.log(error.message);
+    if (!isLoading) {
+      try {
+        addTodoMutation({
+          description: "new Item",
+          status: ItemStatus.IN_PROGRESS,
+        });
+      } catch (error: any) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(todoActions.add(normalizeTodoData([data as ItemPropsMongo])[0]));
+    }
+  }, [data]);
 
   return (
     <Wrapper onClick={handleClick}>
-      <AddIcon/>
-      <AddText>Add new Item</AddText>
+      <AddIcon />
+      {isLoading ? (
+        <Box textAlign="center">
+          <CircularProgress size={10} />
+        </Box>
+      ) : (
+        <AddText>Add new Item</AddText>
+      )}
     </Wrapper>
-  )
+  );
 };
 
 export default Footer;
