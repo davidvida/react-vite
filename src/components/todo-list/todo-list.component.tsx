@@ -7,11 +7,12 @@ import { fetchTodos, todoActions } from "../../slices/todos/todoSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from "@mui/system";
+import { LinearProgress } from "@mui/material";
 
 type Props = {}
 
 const TodoList = ({}: Props) => {
-  const { data, activeItem, loading } = useSelector((state: RootState) => state.todo);
+  const { data, activeItem, loading, creating } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch<AppDispatch>();
   
   useEffect(() => {
@@ -33,6 +34,11 @@ const TodoList = ({}: Props) => {
           }
         </React.Fragment>
       ))}
+      {creating &&
+      <Box textAlign="center">
+        <LinearProgress />
+      </Box>
+      }
     </React.Fragment>
   );
 };
