@@ -23,7 +23,7 @@ export const todosApi = createApi({
         method: 'POST',
         body: body
       }),
-      invalidatesTags: [{ type: 'Todos', id: 'LIST' }]
+      invalidatesTags: [{ type: 'Todos', id: 'LIST' }] // ? whebn invalidating we want to run this again?
     }),
   })
 });

@@ -15,7 +15,7 @@ export const fetchTodos = createAsyncThunk(
     const response = await fetch(`${API_BASE_URL}${TODO_PREFIX}`);
     const data = await response.json();
     thunkApi.dispatch(normalizeTodos(data));
-    return data;
+    return data; // ? what is it for?
 });
 
 export const normalizeTodos = createAsyncThunk(
@@ -24,6 +24,29 @@ export const normalizeTodos = createAsyncThunk(
     const dataNormalized = normalizeTodoData(data);
     thunkApi.dispatch(todoActions.load(dataNormalized));
 });
+
+export const postTodos = createAsyncThunk(
+  'todos/postTodos',
+  async (data: Partial<ItemPropsMongo>, thunkApi) => {
+    const response = await fetch(`${API_BASE_URL}${TODO_PREFIX}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    const responseData = await response.json();
+    thunkApi.dispatch(addTodos(responseData as ItemPropsMongo));
+  }
+);
+
+export const addTodos = createAsyncThunk(
+  'todos/addTodos',
+  async (data: ItemPropsMongo, thunkApi) => {
+    thunkApi.dispatch(todoActions.add(normalizeTodoData([data])[0]));
+  }
+);
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -45,15 +68,18 @@ const todoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodos.pending, (state, action) => {
-      debugger;
+      //debugger;
       state.loading = true;
     });
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
-      debugger;
+      //debugger;
       state.loading = false;
     });
-    builder.addCase(normalizeTodos.pending, (state, action) => {
-      state.loading = false;
+    builder.addCase(postTodos.pending, (state, action) => {
+      state.itemLoading = true;
+    });
+    builder.addCase(addTodos.fulfilled, (state, action) => {
+      state.itemLoading = false;
     });
   }
 });
