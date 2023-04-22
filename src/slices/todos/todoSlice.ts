@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { API_BASE_URL, TODO_PREFIX } from "../../api/todos-api";
-import { ItemProps, ItemPropsMongo, ItemStatus } from "../../types/todo-item";
+import { todosApi } from "../../api/todos-api";
+import { ItemProps, ItemPropsMongo } from "../../types/todo-item";
 import { normalizeTodoData } from "../../utils/normailize-todo";
 import { initialState } from "./initial-state";
 
@@ -9,13 +9,22 @@ import { initialState } from "./initial-state";
 // Initial actions => iniciar un flujo de acciones, se lanzan desde los componentes, nunca son procesados en los reducers, debe iniciar otras acciones
 // Event actions => son ejecutadas por otras acciones y se encargan de ejecutar otras funcione(s).
 
+export const postTodo = createAsyncThunk(
+  'todos/postTodoProcess',
+  async (params: Partial<ItemProps>, thunkApi) => {
+    thunkApi.dispatch(todoActions.addingItem(true));
+    const response = await thunkApi.dispatch(todosApi.endpoints.addTodo.initiate(params));
+    const responseData = response as { data: ItemPropsMongo };
+    thunkApi.dispatch(todoActions.add(normalizeTodoData([responseData.data])[0]));
+    return responseData;
+});
+
 export const fetchTodos = createAsyncThunk(
-  'todos/fetchTodos',
-  async (params: undefined, thunkApi) => {
-    const response = await fetch(`${API_BASE_URL}${TODO_PREFIX}`);
-    const data = await response.json();
-    thunkApi.dispatch(normalizeTodos(data));
-    return data;
+  'todos/fetchTodosProcess',
+  async (params: string, thunkApi) => {
+    const response = await thunkApi.dispatch(todosApi.endpoints.getAllTodos.initiate(params));
+    thunkApi.dispatch(normalizeTodos(response.data as ItemPropsMongo[]));
+    return response;
 });
 
 export const normalizeTodos = createAsyncThunk(
@@ -23,6 +32,7 @@ export const normalizeTodos = createAsyncThunk(
   async (data: ItemPropsMongo[], thunkApi) => {
     const dataNormalized = normalizeTodoData(data);
     thunkApi.dispatch(todoActions.load(dataNormalized));
+    return null;
 });
 
 const todoSlice = createSlice({
@@ -35,6 +45,9 @@ const todoSlice = createSlice({
     load: (state, action: PayloadAction<ItemProps[]>) => {
       state.data = action.payload
     },
+    addingItem: (state, action: PayloadAction<boolean>) => {
+      state.addingItem = action.payload
+    },
     add: (state, action: PayloadAction<ItemProps>) => {
       state.data.push(action.payload);
     },
@@ -45,15 +58,16 @@ const todoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodos.pending, (state, action) => {
-      debugger;
       state.loading = true;
     });
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
-      debugger;
       state.loading = false;
     });
     builder.addCase(normalizeTodos.pending, (state, action) => {
       state.loading = false;
+    });
+    builder.addCase(postTodo.fulfilled, (state, action) => {
+      state.addingItem = false;
     });
   }
 });

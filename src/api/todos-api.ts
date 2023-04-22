@@ -1,13 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ItemProps, ItemPropsMongo } from "../types/todo-item";
+import { Api } from './api';
 
-export const API_BASE_URL = 'https://todo-service-0qq0.onrender.com/api/v1/';
 export const TODO_PREFIX = 'todos';
 
-export const todosApi = createApi({
-  reducerPath: 'todoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
-  tagTypes: ['Todos'],
+export const todosApi = Api.injectEndpoints({
   endpoints: (builder) => ({
     getAllTodos: builder.query<ItemPropsMongo[], string>({
       query: (searchParam) => ({
@@ -25,7 +22,8 @@ export const todosApi = createApi({
       }),
       invalidatesTags: [{ type: 'Todos', id: 'LIST' }]
     }),
-  })
+  }),
+  overrideExisting: true
 });
 
 export const { useGetAllTodosQuery, useAddTodoMutation } = todosApi;

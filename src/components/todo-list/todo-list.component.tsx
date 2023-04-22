@@ -11,11 +11,11 @@ import { Box } from "@mui/system";
 type Props = {}
 
 const TodoList = ({}: Props) => {
-  const { data, activeItem, loading } = useSelector((state: RootState) => state.todo);
+  const { data, loading, activeItem } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch<AppDispatch>();
   
   useEffect(() => {
-    dispatch(fetchTodos());
+    dispatch(fetchTodos(''));
   }, []);
 
   return (
