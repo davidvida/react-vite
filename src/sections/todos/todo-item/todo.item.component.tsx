@@ -1,10 +1,10 @@
 import React from "react";
-import { ItemProps, ItemStatus } from "../../types/todo-item";
 import TodoItemStatus from "../todo-item-status/todo-item-status.component";
 import { ButtonContainer, IconRemove, TodoDescription, Wrapper } from "./todo-item.styles";
-import { Types } from "../../reducer/actions";
 import { useDispatch } from "react-redux";
-import { todoActions } from "../../slices/todos/todoSlice";
+import { ItemProps, ItemStatus } from "@/types/todo-item";
+import { todoActions } from "@/slices/todos/todoSlice";
+import { Types } from "@/reducer/actions";
 
 type Props = {
   item: ItemProps;

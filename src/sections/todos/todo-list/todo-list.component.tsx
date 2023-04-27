@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { ItemProps } from "../../types/todo-item";
 import TodoItemEdit from "../todo-item-edit/todo-item-edit.component";
 import TodoItem from "../todo-item/todo.item.component";
-import { useSelector, useDispatch, useStore } from 'react-redux';
-import { fetchTodos, todoActions } from "../../slices/todos/todoSlice";
-import { AppDispatch, RootState } from "../../store/store";
+import { useSelector, useDispatch } from 'react-redux';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from "@mui/system";
+import { AppDispatch, RootState } from "@/store/store";
+import { fetchTodos } from "@/slices/todos/todoSlice";
+import { ItemProps } from "@/types/todo-item";
 
 type Props = {}
 

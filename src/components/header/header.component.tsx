@@ -1,12 +1,14 @@
 import React from "react";
 import { Box } from "@mui/system";
-import { useSelector } from "react-redux";
 
-const Header = () => {
-  const data = useSelector((state: any) => state.todo.data);
+type Props = {
+  title: string;
+}
+
+const Header = ({ title }: Props) => {
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
-      <h3 style={{ margin: 0 }} >Header ({data.length})</h3>
+      <h3 style={{ margin: 0 }} >{title}</h3>
     </Box>
   );
 };

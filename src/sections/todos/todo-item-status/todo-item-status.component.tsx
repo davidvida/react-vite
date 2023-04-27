@@ -1,8 +1,8 @@
 
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Types } from "../../reducer/actions";
-import { ItemProps, ItemStatus } from "../../types/todo-item";
+import { Types } from "@/reducer/actions";
+import { ItemProps, ItemStatus } from "@/types/todo-item";
 import { DoneStatus, InProgressStatus, StatusContainer } from "./todo-item.status.styles";
 
 type Props = {

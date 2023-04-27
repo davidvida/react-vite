@@ -1,11 +1,7 @@
-import TodoContainer from "./components/todo-container/todo-container.component";
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import AppRoutes from './routes/routes';
 
 const App = () => (
-  <Provider store={store}>
-    <TodoContainer />
-  </Provider>
+  <AppRoutes />
 );
 
 export default App;

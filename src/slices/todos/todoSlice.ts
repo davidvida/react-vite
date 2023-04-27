@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { todosApi } from "../../api/todos-api";
-import { ItemProps, ItemPropsMongo } from "../../types/todo-item";
-import { normalizeTodoData } from "../../utils/normailize-todo";
+import { todosApi } from "@/api/todos-api";
+import { ItemProps, ItemPropsMongo } from "@/types/todo-item";
+import { normalizeTodoData } from "@/utils/normailize-todo";
 import { initialState } from "./initial-state";
 
 // action types

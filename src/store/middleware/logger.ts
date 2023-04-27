@@ -1,5 +1,5 @@
 import { Middleware } from "redux";
-import { RootState } from "../store";
+import { RootState } from "@/store/store";
 
 export const logger: Middleware<{}, RootState> = store => next => action => {
   console.log('will dispatch', action.type);

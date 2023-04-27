@@ -1,4 +1,4 @@
-import { ItemProps } from "../types/todo-item";
+import { ItemProps } from "@/types/todo-item";
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined

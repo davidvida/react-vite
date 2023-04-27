@@ -1,9 +1,9 @@
 import { Container } from "@mui/material";
 import React from "react";
-import { ItemProps } from "../../types/todo-item";
+import { ItemProps } from "@/types/todo-item";
 import Footer from "../footer/footer.component";
-import Header from "../header/header.component";
 import TodoList from "../todo-list/todo-list.component";
+import Header from "@/components/header/header.component";
 
 type StateProps = {
   data: Array<ItemProps>;
@@ -15,7 +15,7 @@ class TodoContainer extends React.Component<{}, StateProps> {
   render() {
     return (
       <Container maxWidth="xs">
-        <Header />
+        <Header title="Todos"/>
         <TodoList />
         <Footer />
       </Container>

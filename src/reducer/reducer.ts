@@ -1,5 +1,5 @@
-import { staticData } from "../data/items";
-import { ItemProps, ItemStatus } from "../types/todo-item";
+import { staticData } from "@/data/items";
+import { ItemProps, ItemStatus } from "@/types/todo-item";
 import { Types } from "./actions";
 import { StateProps } from "./initial-state";
 

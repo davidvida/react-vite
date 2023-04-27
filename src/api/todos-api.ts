@@ -1,5 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ItemProps, ItemPropsMongo } from "../types/todo-item";
+import { ItemProps, ItemPropsMongo } from "@/types/todo-item";
 import { Api } from './api';
 
 export const TODO_PREFIX = 'todos';

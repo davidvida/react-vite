@@ -1,11 +1,11 @@
 import React from "react";
-import { Avatar, Skeleton, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { Skeleton, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { postTodo } from "../../slices/todos/todoSlice";
-import { AppDispatch, RootState } from "../../store/store";
-import { ItemStatus } from "../../types/todo-item";
+import { postTodo } from "@/slices/todos/todoSlice";
+import { AppDispatch, RootState } from "@/store/store";
+import { ItemStatus } from "@/types/todo-item";
 import { AddIcon, AddText, Wrapper } from "./footer.styles";
-import { Box, Stack } from "@mui/system";
 
 const Footer = () => {
   const dispatch = useDispatch<AppDispatch>();

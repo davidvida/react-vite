@@ -1,7 +1,7 @@
 import React, { Dispatch, useReducer } from "react";
-import { ItemActions } from "../reducer/actions";
-import { StateProps, initialState } from "../reducer/initial-state";
-import appReducer from '../reducer/reducer';
+import { ItemActions } from "@/reducer/actions";
+import { StateProps, initialState } from "@/reducer/initial-state";
+import appReducer from '@/reducer/reducer';
 
 type Props = {
   children: JSX.Element;

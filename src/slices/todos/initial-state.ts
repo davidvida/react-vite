@@ -1,4 +1,4 @@
-import { ItemProps } from "../../types/todo-item";
+import { ItemProps } from "@/types/todo-item";
 
 export type StateProps = {
   data: ItemProps[];
