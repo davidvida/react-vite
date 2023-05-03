@@ -7,3 +7,5 @@ build/
 
 # environment variable files
 .env
+.env.local
+.env.PROD

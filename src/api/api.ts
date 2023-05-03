@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-export const API_BASE_URL = 'https://todo-service-0qq0.onrender.com/api/v1/';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const Api = createApi({
   reducerPath: 'todoApi',
