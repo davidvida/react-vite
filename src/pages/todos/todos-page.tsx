@@ -1,11 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
 import TodoContainer from "@/sections/todos/todo-container/todo-container.component";
-import { store } from "@/store/store";
+import { setupStore} from "@/store/store";
 
 const TodosPage = () => {
   return (
-    <Provider store={store}>
+    <Provider store={setupStore({})}>
       <TodoContainer />
     </Provider>
   );

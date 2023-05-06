@@ -4,7 +4,7 @@
     "strict": true,
     "module": "ESNext",
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {

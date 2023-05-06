@@ -15,15 +15,16 @@ const TodoList = ({}: Props) => {
   const { data, loading, activeItem } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch<AppDispatch>();
   
-  useEffect(() => {
+  const loadData = () => {
     dispatch(fetchTodos(''));
-  }, []);
+  };
 
   return (
-    <React.Fragment>
+    <>
+      <button data-testid="startButton" onClick={loadData}></button>
       {loading &&
       <Box textAlign="center">
-        <CircularProgress size={10} />
+        <CircularProgress size={10} data-testid="progress" />
       </Box>
       }
       {data.map((item: ItemProps) => (
@@ -34,7 +35,7 @@ const TodoList = ({}: Props) => {
           }
         </React.Fragment>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -24,7 +24,7 @@ const TodoItem = ({ item }: Props) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper role="listitem">
       <TodoItemStatus item={item}/>
       <TodoDescription
         style={{ textDecoration: status === ItemStatus.DONE ? 'line-through' : '' }}

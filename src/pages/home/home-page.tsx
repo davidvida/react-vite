@@ -1,11 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { PrimaryButton } from "./home-page.styles";
 
-const HomePage = () => {
+type Props = {
+  handleRedirect: (route: string) => void;
+}
+
+const HomePage:React.FC<Props> = ({ handleRedirect }) => {
+  const [ disabled, setDisabled ] = useState(false);
+
+  const handleClick = () => {
+    setDisabled(prev => !prev);
+    handleRedirect('/todos');
+  }
+
   return (
     <>
       <div>Home Page</div>
-      <Link to="/todos">go to Todos</Link>
+      <PrimaryButton color="primary" onClick={handleClick} disabled={disabled} >Go to Todos</PrimaryButton>
     </>
   );
 }

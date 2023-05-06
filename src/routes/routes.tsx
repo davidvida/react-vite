@@ -9,7 +9,7 @@
     /auth/resetPassword => AuthResetPasswordPage
 */
 import React, { Suspense } from "react";
-import { Outlet, Routes, Route } from "react-router-dom";
+import { Outlet, Routes, Route, useNavigate } from "react-router-dom";
 import LoadingPageIndicator from "@/components/loading-page-indicator/loading-page-indicator.component";
 
 const HomePage = React.lazy(() => import('@/pages/home/home-page'));
@@ -18,6 +18,13 @@ const ConfigPage = React.lazy(() => import('@/pages/config/config-page'));
 const NotFoundPage = React.lazy(() => import('@/pages/not-found/not-found-page'));
 
 const AppRoutes = () => {
+  const navigate = useNavigate();
+
+  const handleRedirect = (route: string) => {
+    navigate(route);
+  }
+
+
   return (
     <Routes>
       <Route path="/" element={
@@ -26,12 +33,12 @@ const AppRoutes = () => {
         </div>
         }>
         <Route index element={
-          <Suspense fallback={<LoadingPageIndicator />}>
-            <HomePage />
+          <Suspense fallback={<LoadingPageIndicator label="Loading Home Page..."/>}>
+            <HomePage handleRedirect={handleRedirect} />
           </Suspense>
         } />
         <Route path="/todos" element={
-          <Suspense fallback={<LoadingPageIndicator />}>
+          <Suspense fallback={<LoadingPageIndicator label="Loading Todos Page..."/>}>
             <TodosPage />
           </Suspense>
           }
