@@ -5,11 +5,9 @@ export const API_BASE_URL = process.env.API_BASE_URL;
 
 export const handlers = [
   rest.get(`${API_BASE_URL}/todos`, (req, res, ctx) => {
-    debugger;
-    console.log('dvida');
-    return res(ctx.status(200), ctx.json({data: [
+    return res(ctx.status(200), ctx.json([
       { _id: '1111111', description: 'Item 1', status: ItemStatus.IN_PROGRESS },
       { _id: '1111112', description: 'Item 2', status: ItemStatus.IN_PROGRESS }
-    ]}), ctx.delay(150))
+    ]), ctx.delay(150))
   })
 ];
